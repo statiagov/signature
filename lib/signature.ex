@@ -137,7 +137,7 @@ defmodule Signature do
 
   defp row_to_item(row) do
     item = Item.new %{email: row["email"], name: row["name"], title: row["title"],
-             adres: row["adres"], tel: row["adres"], mob: row["mob"]}
+             adres: row["adres"], tel: row["tel"], mob: row["mob"]}
     case Vex.valid? item  do
       true -> item
       _    -> raise "Some exception"
@@ -240,7 +240,7 @@ defmodule Signature.Image do
 
   def generate_temp_file do
     temp_html = "#{@temp_dir}/#{:rand.uniform(1_000_000_000)}.html"
-    {:ok, file} = File.open(temp_html, [:write, :utf8])
+    {:ok, file} = File.open(temp_html, [:write])
     {temp_html, file}
   end
 
