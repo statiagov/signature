@@ -331,10 +331,10 @@ defmodule Signature.PathAgent do
   def init_opts(path_from_options) do
     options = [
       wkhtml_path: System.find_executable("wkhtmltoimage"),
-      ftp_user: String.to_charlist(System.get_env("STATIAGOVERNMENT_FTP_USER")),
-      ftp_login: String.to_charlist(System.get_env("STATIAGOVERNMENT_FTP_LOGIN")),
-      ftp_host: String.to_charlist(System.get_env("STATIAGOVERNMENT_FTP_HOST")),
-      ftp_sig_location: String.to_charlist(System.get_env("STATIAGOVERNMENT_FTP_SIG_LOC"))
+      ftp_user: to_charlist(System.get_env("STATIAGOVERNMENT_FTP_USER")),
+      ftp_login: to_charlist(System.get_env("STATIAGOVERNMENT_FTP_LOGIN")),
+      ftp_host: to_charlist(System.get_env("STATIAGOVERNMENT_FTP_HOST")),
+      ftp_sig_location: to_charlist(System.get_env("STATIAGOVERNMENT_FTP_SIG_LOC"))
     ]
     ++ path_from_options
 
