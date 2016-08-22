@@ -221,6 +221,17 @@ defmodule Signature.Html do
     render_html(signature: item, css: css)
   end
 
+  def email(item, link) do
+    css = Path.expand("priv/email.css", @root_dir)
+    render_email(signature: item, link: link, css: css)
+  end
+
+  EEx.function_from_file(:def, :render_email,
+    Path.expand("priv/email.html", @root_dir),
+    [:assigns],
+    trum: true
+  )
+
   EEx.function_from_file(:def, :render_html,
     Path.expand("priv/layout.html", @root_dir),
     [:assigns],
@@ -298,18 +309,7 @@ defmodule Signature.Mail do
     |> to(item.email)
     |> from("it.noreply@statiagov.com")
     |> subject("Signature Instructions")
-    |> html_body("""
-
-      Hey, #{item.name} \n
-
-      Please use the following linked image for your signature: <a href =#{link}>signature</a> \n
-
-     \n
-     \n
-
-     IT Department Bot
-
-    """)
+    |> html_body(Signature.Html.email(item, link))
   end
 end
 
